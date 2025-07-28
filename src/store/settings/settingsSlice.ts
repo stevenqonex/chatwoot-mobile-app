@@ -19,9 +19,32 @@ interface SettingsState {
   version: string;
   pushToken: string;
 }
+
+// Get Chatwoot URL from environment variable or use default
+const getChatwootUrl = () => {
+  const envUrl = process.env.EXPO_PUBLIC_CHATWOOT_BASE_URL;
+  if (envUrl) {
+    // Ensure URL has proper format
+    const cleanUrl = envUrl.replace(/\/$/, ''); // Remove trailing slash
+    return {
+      baseUrl: cleanUrl.replace(/^https?:\/\//, ''), // Remove protocol
+      installationUrl: `${cleanUrl}/`,
+      webSocketUrl: `wss://${cleanUrl.replace(/^https?:\/\//, '')}/cable`,
+    };
+  }
+  // Default to app.chatwoot.com
+  return {
+    baseUrl: 'app.chatwoot.com',
+    installationUrl: 'https://app.chatwoot.com/',
+    webSocketUrl: 'wss://app.chatwoot.com/cable',
+  };
+};
+
+const { baseUrl, installationUrl, webSocketUrl } = getChatwootUrl();
+
 const initialState: SettingsState = {
-  baseUrl: 'app.chatwoot.com',
-  installationUrl: 'https://app.chatwoot.com/',
+  baseUrl,
+  installationUrl,
   uiFlags: {
     isSettingUrl: false,
     isUpdating: false,
@@ -37,7 +60,7 @@ const initialState: SettingsState = {
     selected_push_flags: [],
     user_id: 0,
   },
-  webSocketUrl: 'wss://app.chatwoot.com/cable',
+  webSocketUrl,
   theme: 'system',
   version: '',
   pushToken: '',
