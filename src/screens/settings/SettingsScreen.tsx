@@ -97,7 +97,7 @@ const SettingsScreen = () => {
 
   const pushToken = useAppSelector(selectPushToken);
 
-  const userPermissions = getUserPermissions(user, activeAccountId);
+  const userPermissions = user ? getUserPermissions(user, activeAccountId || null) : [];
 
   const hasConversationPermission = CONVERSATION_PERMISSIONS.some(permission =>
     userPermissions.includes(permission),
@@ -122,7 +122,8 @@ const SettingsScreen = () => {
 
   const isChatwootCloud = useAppSelector(selectIsChatwootCloud);
 
-  const chatwootInstance = isChatwootCloud ? `${appName} cloud` : `${appName} self-hosted`;
+  // const chatwootInstance = isChatwootCloud ? `${appName} cloud` : `${appName} self-hosted`;
+  const chatwootInstance = appName;
 
   const accounts = useSelector(selectAccounts) || [];
 
@@ -252,14 +253,14 @@ const SettingsScreen = () => {
   ];
 
   const supportList: GenericListType[] = [
-    {
-      hasChevron: true,
-      title: i18n.t('SETTINGS.READ_DOCS'),
-      icon: <SwitchIcon />,
-      subtitle: '',
-      subtitleType: 'light',
-      onPressListItem: openURL,
-    },
+    // {
+    //   hasChevron: true,
+    //   title: i18n.t('SETTINGS.READ_DOCS'),
+    //   icon: <SwitchIcon />,
+    //   subtitle: '',
+    //   subtitleType: 'light',
+    //   onPressListItem: openURL,
+    // },
     {
       hasChevron: true,
       title: i18n.t('SETTINGS.CHAT_WITH_US'),

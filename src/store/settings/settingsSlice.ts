@@ -32,11 +32,11 @@ const getChatwootUrl = () => {
       webSocketUrl: `wss://${cleanUrl.replace(/^https?:\/\//, '')}/cable`,
     };
   }
-  // Default to app.chatwoot.com
+  // Default to chat.responpintar.com
   return {
-    baseUrl: 'app.chatwoot.com',
-    installationUrl: 'https://app.chatwoot.com/',
-    webSocketUrl: 'wss://app.chatwoot.com/cable',
+    baseUrl: 'chat.responpintar.com',
+    installationUrl: 'https://chat.responpintar.com/',
+    webSocketUrl: 'wss://chat.responpintar.com/cable',
   };
 };
 
