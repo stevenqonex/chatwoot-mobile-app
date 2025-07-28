@@ -109,11 +109,13 @@ const LoginScreen = () => {
         <Animated.ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={tailwind.style('px-6 pt-24')}>
-          <Image
-            source={require('@/assets/images/logo.png')}
-            style={tailwind.style('w-10 h-10')}
-            resizeMode="contain"
-          />
+          <View style={tailwind.style('items-center')}>
+            <Image
+              source={require('@/assets/images/logo.png')}
+              style={tailwind.style('w-20 h-20')}
+              resizeMode="contain"
+            />
+          </View>
           <View style={tailwind.style('pt-6 gap-4')}>
             <Animated.Text style={tailwind.style('text-2xl text-gray-950 font-inter-semibold-20')}>
               {i18n.t('LOGIN.TITLE')}

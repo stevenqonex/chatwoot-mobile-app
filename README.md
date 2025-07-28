@@ -131,7 +131,7 @@ EXPO_PUBLIC_CHATWOOT_DOMAIN=your-domain.com
 
 1. **Install EAS CLI**:
    ```bash
-   npm install -g @expo/eas-cli
+   npm install -g eas-cli
    ```
 
 2. **Login to Expo**:

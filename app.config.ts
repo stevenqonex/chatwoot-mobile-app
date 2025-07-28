@@ -70,7 +70,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         storybookEnabled: process.env.EXPO_STORYBOOK_ENABLED,
       },
     },
-    owner: process.env.EXPO_PUBLIC_EXPO_OWNER || 'chatwoot',
+    owner: process.env.EXPO_PUBLIC_EXPO_OWNER || 'responpintar',
     plugins: [
       'expo-font',
       ['react-native-permissions', { iosPermissions: ['Camera', 'PhotoLibrary', 'MediaLibrary'] }],
