@@ -38,10 +38,12 @@ Before you begin development, ensure you have the following installed:
 
 - **Node.js** (version 18 or higher)
 - **pnpm** (the project uses pnpm as package manager)
-- **Expo CLI** (`npm install -g @expo/cli`)
+- **EAS CLI** (`npm install -g eas-cli`)
 - **React Native development environment**:
   - For iOS: Xcode (macOS only)
   - For Android: Android Studio with Android SDK
+
+**Note**: The project uses the local Expo CLI (installed with the project) for development commands. You only need to install EAS CLI globally for production builds and deployment.
 
 ### Setup Instructions
 
@@ -129,7 +131,7 @@ EXPO_PUBLIC_CHATWOOT_DOMAIN=your-domain.com
 
 ##### EAS Project ID (Expo Application Services)
 
-1. **Install EAS CLI**:
+1. **Install EAS CLI** (if not already installed):
    ```bash
    npm install -g eas-cli
    ```
@@ -236,13 +238,13 @@ EXPO_PUBLIC_CHATWOOT_DOMAIN=your-domain.com
 #### 3. Development Commands
 
 ```bash
-# Start the development server
+# Start the development server (uses local Expo CLI)
 pnpm start
 
-# Run on iOS simulator/device
+# Run on iOS simulator/device (uses local Expo CLI)
 pnpm ios
 
-# Run on Android emulator/device
+# Run on Android emulator/device (uses local Expo CLI)
 pnpm android
 
 # Clean and regenerate native code
@@ -260,22 +262,26 @@ pnpm storybook:ios
 pnpm storybook:android
 ```
 
+**Note**: Development commands use the local Expo CLI (installed with the project) via `npx expo`. This provides better versioning and stability compared to the old global Expo CLI.
+
 #### 4. Building for Production
 
 ```bash
-# Build for Android
+# Build for Android (uses EAS CLI)
 pnpm build:android
 
-# Build for iOS
+# Build for iOS (uses EAS CLI)
 pnpm build:ios
 
-# Build for both platforms
+# Build for both platforms (uses EAS CLI)
 pnpm build:all
 
 # Build locally (requires EAS CLI)
 pnpm build:android:local
 pnpm build:ios:local
 ```
+
+**Note**: Production builds use EAS CLI for cloud builds. The free tier includes 30 builds per month, making it accessible for development and initial deployment.
 
 ### Project Structure
 
@@ -308,11 +314,27 @@ src/
 
 ### Development Workflow
 
-1. **Start Development Server**: `pnpm start`
-2. **Run on Device/Simulator**: `pnpm ios` or `pnpm android`
+1. **Start Development Server**: `pnpm start` (uses local Expo CLI)
+2. **Run on Device/Simulator**: `pnpm ios` or `pnpm android` (uses local Expo CLI)
 3. **Component Development**: Use Storybook with `pnpm start:storybook`
 4. **Testing**: Run tests with `pnpm test`
 5. **Code Quality**: Lint code with `pnpm lint`
+6. **Production Builds**: Use `pnpm build:android` or `pnpm build:ios` (uses EAS CLI)
+
+### CLI Tools Overview
+
+This project uses two CLI tools for different purposes:
+
+- **Local Expo CLI** (`@expo/cli`): Installed with the project, used for development commands
+  - Faster and more stable than the old global CLI
+  - Versioned with your project for better compatibility
+  - Used for: `pnpm start`, `pnpm ios`, `pnpm android`
+
+- **EAS CLI** (`eas-cli`): Installed globally, used for production builds and deployment
+  - Cloud builds (no Mac required for iOS builds)
+  - App store submissions
+  - Free tier: 30 builds/month
+  - Used for: `pnpm build:android`, `pnpm build:ios`
 
 ### Troubleshooting
 
