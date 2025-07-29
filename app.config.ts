@@ -3,7 +3,7 @@ import { ExpoConfig, ConfigContext } from 'expo/config';
 export default ({ config }: ConfigContext): ExpoConfig => {
   return {
     name: process.env.EXPO_PUBLIC_APP_NAME || 'Responpintar',
-    slug: process.env.EXPO_PUBLIC_APP_SLUG || 'responpintar-mobile',
+    slug: process.env.EXPO_PUBLIC_APP_SLUG || 'responpintar',
     version: '4.0.19',
     orientation: 'portrait',
     icon: './assets/icon.png',
@@ -66,7 +66,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     extra: {
       eas: {
-        projectId: process.env.EXPO_PUBLIC_PROJECT_ID,
+        projectId: "50b91d2b-ab92-4911-a537-c40106b79d97",
         storybookEnabled: process.env.EXPO_STORYBOOK_ENABLED,
       },
     },

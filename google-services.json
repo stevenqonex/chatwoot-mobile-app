@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "435075622889",
+    "project_id": "responpintar-prod",
+    "storage_bucket": "responpintar-prod.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:435075622889:android:895bdb2696c469d1298d78",
+        "android_client_info": {
+          "package_name": "com.responpintar.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCT0s7HFlzc9tU0NeRlg8OQIMvb40gPzw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

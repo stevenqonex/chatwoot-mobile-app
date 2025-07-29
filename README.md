@@ -112,6 +112,87 @@ EXPO_PUBLIC_CHATWOOT_DOMAIN=your-domain.com
    - In Firebase Console, go to "Messaging" section
    - Enable Cloud Messaging for both platforms
 
+##### Firebase Secrets Setup for EAS Builds
+
+For production builds using EAS Build, you need to upload your Firebase configuration files as secrets instead of committing them to git.
+
+**Important**: Never commit `google-services.json` or `GoogleService-Info.plist` to your repository. These files contain sensitive API keys and should be kept secure.
+
+1. **Upload Android Google Services File**:
+   ```bash
+   # Upload google-services.json as an EAS secret
+   eas secret:create --scope project --name GOOGLE_SERVICES_JSON --type file --value ./google-services.json
+   ```
+
+2. **Upload iOS Google Services File**:
+   ```bash
+   # Upload GoogleService-Info.plist as an EAS secret
+   eas secret:create --scope project --name GOOGLE_SERVICES_PLIST --type file --value ./GoogleService-Info.plist
+   ```
+
+3. **Configure EAS Build Environment Variables**:
+   
+   Update your `eas.json` file to include the Firebase environment variables:
+
+   ```json
+   {
+     "cli": {
+       "version": ">= 12.3.0",
+       "appVersionSource": "remote"
+     },
+     "build": {
+       "development": {
+         "developmentClient": true,
+         "distribution": "internal",
+         "env": {
+           "EXPO_PUBLIC_ANDROID_GOOGLE_SERVICES_FILE": "GOOGLE_SERVICES_JSON",
+           "EXPO_PUBLIC_IOS_GOOGLE_SERVICES_FILE": "GOOGLE_SERVICES_PLIST"
+         }
+       },
+       "production": {
+         "autoIncrement": true,
+         "env": {
+           "EXPO_PUBLIC_ANDROID_GOOGLE_SERVICES_FILE": "GOOGLE_SERVICES_JSON",
+           "EXPO_PUBLIC_IOS_GOOGLE_SERVICES_FILE": "GOOGLE_SERVICES_PLIST"
+         }
+       }
+     },
+     "submit": {
+       "production": {
+         "android": {
+           "track": "internal"
+         }
+       }
+     }
+   }
+   ```
+
+4. **Verify Secrets are Uploaded**:
+   ```bash
+   # List all project secrets
+   eas secret:list --scope project
+   ```
+
+5. **For Local Development**:
+   
+   For local development, you don't need to set these environment variables. Expo will automatically find the Firebase files in your project root:
+   - `./google-services.json` for Android
+   - `./GoogleService-Info.plist` for iOS
+
+   If you want to set them explicitly for local development, you can add them to your `.env` file:
+   ```bash
+   # Optional: For local development (not required)
+   EXPO_PUBLIC_ANDROID_GOOGLE_SERVICES_FILE=./google-services.json
+   EXPO_PUBLIC_IOS_GOOGLE_SERVICES_FILE=./GoogleService-Info.plist
+   ```
+
+**Security Best Practices**:
+- ✅ Keep Firebase files in your project root for local development
+- ✅ Upload files as EAS secrets for cloud builds
+- ✅ Never commit Firebase files to git (they're already in `.gitignore`)
+- ✅ Use different Firebase projects for development and production
+- ✅ Regularly rotate Firebase API keys
+
 ##### Sentry Configuration (Error Tracking)
 
 1. **Create Sentry Account**:
@@ -262,7 +343,7 @@ pnpm storybook:ios
 pnpm storybook:android
 ```
 
-**Note**: Development commands use the local Expo CLI (installed with the project) via `npx expo`. This provides better versioning and stability compared to the old global Expo CLI.
+**Note**: Development commands use the local Expo CLI (installed with the project) via `npx expo`. This provides better versioning and stability compared to the old global CLI.
 
 #### 4. Building for Production
 
