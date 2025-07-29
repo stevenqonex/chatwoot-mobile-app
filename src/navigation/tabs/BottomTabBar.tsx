@@ -36,13 +36,15 @@ type TabBarIconsProps = {
 };
 
 const TabBarIcons = ({ focused, route }: TabBarIconsProps) => {
+  const activeColor = "#166534"; // Green-800 color
+  
   switch (route.name) {
     case 'Conversations':
-      return focused ? <ConversationIconFilled /> : <ConversationIconOutline />;
+      return focused ? <ConversationIconFilled color={activeColor} /> : <ConversationIconOutline />;
     case 'Inbox':
-      return focused ? <InboxIconFilled /> : <InboxIconOutline />;
+      return focused ? <InboxIconFilled color={activeColor} /> : <InboxIconOutline />;
     case 'Settings':
-      return focused ? <SettingsIconFilled /> : <SettingsIconOutline />;
+      return focused ? <SettingsIconFilled color={activeColor} /> : <SettingsIconOutline />;
   }
 };
 
