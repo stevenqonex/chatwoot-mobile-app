@@ -65,7 +65,8 @@ export const ChatHeader = ({
             <Icon icon={<ChevronLeft />} size={24} />
           </Pressable>
           <Pressable
-            onPress={onContactDetailsPress}
+            // onPress={onContactDetailsPress}
+            onPress={undefined}
             style={tailwind.style('flex flex-row items-center flex-1')}>
             <Avatar size="xl" src={imageSrc} name={name} />
             <Animated.View style={tailwind.style('pl-2')}>

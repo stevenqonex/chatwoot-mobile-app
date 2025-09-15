@@ -15,6 +15,7 @@
     "run:android": "npx expo run:android -d",
     "run:doctor": "npx expo-doctor",
     "check:config": "npx expo-config check",
+    "build:android:apk:local": "dotenv -c -- eas build -p android --profile production-apk --local",
     "build:android:local": "dotenv -c -- eas build -p android --profile production --local",
     "build:android": "eas build -p android --profile production",
     "build:ios:local": "dotenv -c -- eas build -p ios --profile production --local",
@@ -66,6 +67,7 @@
     "expo-av": "~15.0.2",
     "expo-build-properties": "~0.13.2",
     "expo-constants": "^17.0.8",
+    "expo-dev-client": "~5.0.20",
     "expo-file-system": "~18.0.12",
     "expo-font": "~13.0.4",
     "expo-haptics": "~14.0.1",
@@ -179,5 +181,6 @@
     "patchedDependencies": {
       "ffmpeg-kit-react-native@6.0.2": "patches/ffmpeg-kit-react-native.patch"
     }
-  }
+  },
+  "packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af"
 }
